@@ -13,7 +13,7 @@ appointmentsRouter.use(ensureAuthenticated);
 appointmentsRouter.get('/', async (request, response) => {
   const appointmentRepository = getCustomRepository(AppointmentRepository);
   const appointments = await appointmentRepository.find({
-    where: { id: request.user.id },
+    where: { provider_id: request.user.id },
   });
   return response.json(appointments);
 });
