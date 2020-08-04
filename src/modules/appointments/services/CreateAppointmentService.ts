@@ -1,4 +1,5 @@
 import startOfHour from 'date-fns/startOfHour';
+import { inject, injectable } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 
@@ -9,9 +10,12 @@ interface IRequestDTO {
   provider_id: string;
   date: Date;
 }
-
+@injectable()
 class CreateAppointmentService {
-  constructor(private appointmentsRepository: IAppointmentsRepository) { }
+  constructor(
+    @inject('IAppointmentsRepository')
+    private appointmentsRepository: IAppointmentsRepository,
+  ) { }
 
   public async execute({
     date,
@@ -19,7 +23,7 @@ class CreateAppointmentService {
   }: IRequestDTO): Promise<Appointment> {
     const appointmentDate = startOfHour(date);
     const findAppoimentInSameDate = await this.appointmentsRepository.findByDate(
-      appointmentDate
+      appointmentDate,
     );
 
     if (findAppoimentInSameDate) {
