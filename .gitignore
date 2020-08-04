@@ -1,2 +1,4 @@
-back_end/node_modules
-*.DS_Store
+node_modules
+.vscode
+tmp/*
+!tmp/.gitkeep
