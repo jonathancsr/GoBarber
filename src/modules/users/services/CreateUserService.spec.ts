@@ -16,4 +16,22 @@ describe('CreateUser', () => {
 
     expect(user).toHaveProperty('id');
   });
+
+
+  it('should not be able to create a new user with same email from another', async () => {
+    const fakeUsersRepository = new FakeUsersRepository();
+    const createUserService = new CreateUserService(fakeUsersRepository);
+
+    await createUserService.execute({
+      name: 'User 1',
+      email: 'user1@user.com',
+      password: 'password',
+    });
+
+    expect(createUserService.execute({
+      name: 'User 2',
+      email: 'user1@user.com',
+      password: 'passsword',
+    })).rejects.toBeInstanceOf(AppError);
+  });
 });
