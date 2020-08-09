@@ -17,7 +17,7 @@ class CreateUserService {
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
 
-    @inject('hashProvider')
+    @inject('HashProvider')
     private hashProvider: IHashProvider,
   ) { }
 
