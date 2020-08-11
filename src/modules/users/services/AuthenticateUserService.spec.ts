@@ -4,7 +4,6 @@ import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import CreateUserService from './CreateUserService';
 import AuthenticateUserService from './AuthenticateUserService';
 
-
 describe('AuthenticateUser', () => {
   it('should be able to authenticate', async () => {
     const fakeUsersRepository = new FakeUsersRepository();
@@ -27,7 +26,6 @@ describe('AuthenticateUser', () => {
 
     const authenticatedUser = await authenticateUserService.execute({ email: 'user1@user.com', password: 'password' });
 
-
     expect(authenticatedUser).toHaveProperty('token');
     expect(authenticatedUser.user).toEqual(user);
   });
@@ -35,7 +33,6 @@ describe('AuthenticateUser', () => {
   it('should not be able to authenticate a user with password incorrect', async () => {
     const fakeUsersRepository = new FakeUsersRepository();
     const fakeHashProvider = new FakeHashProvider();
-
 
     const createUserService = new CreateUserService(
       fakeUsersRepository,
@@ -52,7 +49,7 @@ describe('AuthenticateUser', () => {
       password: 'password',
     });
 
-    expect(authenticateUserService.execute(
+    await expect(authenticateUserService.execute(
       {
         email:
           'user1@user.com',
@@ -70,6 +67,6 @@ describe('AuthenticateUser', () => {
       fakeHashProvider,
     );
 
-    expect(authenticateUserService.execute({ email: 'user1@usaer.com', password: 'qweqwe' })).rejects.toBeInstanceOf(AppError);
+    await expect(authenticateUserService.execute({ email: 'user1@usaer.com', password: 'qweqwe' })).rejects.toBeInstanceOf(AppError);
   });
 });
