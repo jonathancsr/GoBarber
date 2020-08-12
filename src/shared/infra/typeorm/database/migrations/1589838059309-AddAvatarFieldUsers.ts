@@ -2,7 +2,7 @@ import { MigrationInterface, QueryRunner, TableColumn } from 'typeorm';
 import { query } from 'express';
 
 export default class AddAvatarFieldUsers1589838059309
-  implements MigrationInterface {
+implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
     await queryRunner.addColumn(
       'users',
@@ -10,7 +10,7 @@ export default class AddAvatarFieldUsers1589838059309
         name: 'avatar',
         type: 'varchar',
         isNullable: true,
-      })
+      }),
     );
   }
 

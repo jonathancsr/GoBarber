@@ -29,7 +29,7 @@ class UsersTokensRepository implements IUserTokensRepository {
     return userToken;
   }
 
-  public async save(user: User): Promise<User> {
+  public async save(user: UserToken): Promise<UserToken> {
     return this.ormRepository.save(user);
   }
 }
