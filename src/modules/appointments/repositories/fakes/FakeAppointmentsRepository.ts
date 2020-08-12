@@ -1,4 +1,4 @@
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
 import { isEqual } from 'date-fns';
 
 import IAppointmentRepository from '@modules/appointments/repositories/IAppointmentRepository';
@@ -21,7 +21,6 @@ class AppointmentsRepository implements IAppointmentRepository {
     date,
   }: ICreateAppointmentDTO): Promise<Appointment> {
     const appointment = new Appointment();
-
 
     Object.assign(appointment, { id: uuid(), date, provider_id });
 
